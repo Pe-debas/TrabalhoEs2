@@ -16,8 +16,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 public class MoodleClient {
 
     String url = "https://moodle.pucrs.br/webservice/rest/server.php";
@@ -26,7 +24,7 @@ public class MoodleClient {
     public String consultarMoodle(String urlConsulta){
         try{
             HttpClient cliente = HttpClient.newHttpClient();
-            HttpRequest requisicao = HttpRequest.newBuilder().uri(URI.create(url)).build();
+            HttpRequest requisicao = HttpRequest.newBuilder().uri(URI.create(urlConsulta)).build();
             HttpResponse<String> resposta = cliente.send(requisicao, HttpResponse.BodyHandlers.ofString()); 
 
             return resposta.body();
@@ -121,7 +119,7 @@ public class MoodleClient {
     }
 
     public List<Entrega> buscarSubmissoes(long idTarefa) {
-        String funcao = "?wsfunction=mod_assign_get_submissions";
+        String funcao = "mod_assign_get_submissions";
 
         String urlConsulta = url
             + "?wsfunction=" + funcao

@@ -5,12 +5,23 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import trabalho.acompanhamento.services.PublicadorReengajamento;
+
 import trabalho.acompanhamento.modelos.Aluno;
 import trabalho.acompanhamento.modelos.Entrega;
 import trabalho.acompanhamento.modelos.Solicitacao;
 import trabalho.acompanhamento.modelos.Tarefa;
 
+@Service 
 public class AcompanhamentoService {
+
+    private final PublicadorReengajamento publicador;
+
+    public AcompanhamentoService(PublicadorReengajamento publicador) {
+        this.publicador = publicador;
+    }
 
     public List<Solicitacao> verificarTarefas(
             List<Aluno> alunos,
@@ -50,6 +61,7 @@ public class AcompanhamentoService {
                                 tarefa.getId(),
                                 aluno.getId(),
                                 tarefa.getNome(),
+                                tarefa.getDescricao(),
                                 aluno.getNome(),
                                 aluno.getEmail(),
                                 tarefa.getPrazo());
@@ -61,5 +73,12 @@ public class AcompanhamentoService {
         }
 
         return solicitacoes;
+    }
+
+     public void publicarSolicitacoes(List<Solicitacao> solicitacoes) {
+
+        for (Solicitacao solicitacao : solicitacoes) {
+            publicador.publicar(solicitacao);
+        }
     }
 }

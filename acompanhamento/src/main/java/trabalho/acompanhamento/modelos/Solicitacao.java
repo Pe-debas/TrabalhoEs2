@@ -10,16 +10,18 @@ public class Solicitacao {
     long idAluno;
 
     String nomeTarefa;
+    String descricaoTarefa;
     String nomeAluno;
     String emailAluno;
 
     Instant prazo;
 
-    public Solicitacao(long idCurso, long idTarefa, long idAluno, String nomeTarefa, String nomeAluno, String emailAluno, Instant prazo) {
+    public Solicitacao(long idCurso, long idTarefa, long idAluno, String nomeTarefa, String descricaoTarefa, String nomeAluno, String emailAluno, Instant prazo) {
         this.idCurso = idCurso;
         this.idTarefa = idTarefa;
         this.idAluno = idAluno;
         this.nomeTarefa = nomeTarefa;
+        this.descricaoTarefa = descricaoTarefa;
         this.nomeAluno = nomeAluno;
         this.emailAluno = emailAluno;
         this.prazo = prazo;
@@ -41,6 +43,10 @@ public class Solicitacao {
         return nomeTarefa;
     }
 
+    public String getDescricaoTarefa(){
+        return descricaoTarefa;
+    }
+
     public String getNomeAluno() {
         return nomeAluno;
     }
@@ -51,6 +57,12 @@ public class Solicitacao {
 
     public Instant getPrazo() {
         return prazo;
+    }
+
+    @Override
+    public String toString() {
+        return "Solicitacao [idCurso=" + idCurso + ", idTarefa=" + idTarefa + ", idAluno=" + idAluno + ", nomeTarefa="
+                + nomeTarefa + ", nomeAluno=" + nomeAluno + ", emailAluno=" + emailAluno + ", prazo=" + prazo + "]";
     }
 
     
