@@ -12,5 +12,17 @@ services:
       - rabbitmq_data:/var/lib/rabbitmq
     restart: unless-stopped
 
+  
+  moodle-simulado:
+    build:
+      context: ./moodle-simulado
+    container_name: moodle-simulado
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+
 volumes:
   rabbitmq_data:
+
+  

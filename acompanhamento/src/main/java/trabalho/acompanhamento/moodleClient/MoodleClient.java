@@ -7,6 +7,8 @@ import trabalho.acompanhamento.modelos.Aluno;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -16,9 +18,13 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+
+@Component 
 public class MoodleClient {
 
-    String url = "https://moodle.pucrs.br/webservice/rest/server.php";
+    @Value("${moodle.base-url}")
+    private String moodleBaseUrl;
     
 
     public String consultarMoodle(String urlConsulta){
@@ -40,9 +46,10 @@ public class MoodleClient {
     public List<Tarefa> buscarTarefas(long idCurso) {
         String funcao = "mod_assign_get_assignments";
 
-        String urlConsulta = url
+        String urlConsulta = moodleBaseUrl
             + "?wsfunction=" + funcao
-            + "&moodlewsrestformat=json";
+            + "&moodlewsrestformat=json"
+            + "idCurso=" + idCurso;
 
         String resposta = consultarMoodle(urlConsulta);
 
@@ -86,7 +93,7 @@ public class MoodleClient {
     public List<Aluno> buscarAlunos(long idCurso) {
         String funcao = "core_enrol_get_enrolled_users";
 
-        String urlConsulta = url
+        String urlConsulta = moodleBaseUrl
             + "?wsfunction=" + funcao
             + "&moodlewsrestformat=json"
             + "&courseid=" + idCurso;
@@ -121,7 +128,7 @@ public class MoodleClient {
     public List<Entrega> buscarSubmissoes(long idTarefa) {
         String funcao = "mod_assign_get_submissions";
 
-        String urlConsulta = url
+        String urlConsulta = moodleBaseUrl
             + "?wsfunction=" + funcao
             + "&moodlewsrestformat=json"
             + "&assignmentids[0]=" + idTarefa;    

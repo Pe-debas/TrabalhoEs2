@@ -1,0 +1,49 @@
+
+{
+  "courses": [
+    {
+      "id": 101,
+      "fullname": "Curso de Teste - Engenharia de Software"
+    }
+  ],
+  "students": [
+    {
+      "id": 1001,
+      "fullname": "Ana Silva",
+      "email": "ana@example.com"
+    },
+    {
+      "id": 1002,
+      "fullname": "Bruno Souza",
+      "email": "bruno@example.com"
+    }
+  ],
+  "assignments": [
+    {
+      "id": 2001,
+      "course": 101,
+      "name": "Trabalho de Microsserviços",
+      "intro": "Implementar comunicação entre serviços.",
+      "hours_until_due": 12
+    },
+    {
+      "id": 2002,
+      "course": 101,
+      "name": "Exercício de Docker",
+      "intro": "Criar e executar um contêiner.",
+      "hours_until_due": 48
+    }
+  ],
+  "submissions": [
+    {
+      "assignment": 2001,
+      "student": 1001,
+      "status": "submitted"
+    },
+    {
+      "assignment": 2002,
+      "student": 1002,
+      "status": "submitted"
+    }
+  ]
+}

@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import trabalho.acompanhamento.services.PublicadorReengajamento;
-
 import trabalho.acompanhamento.modelos.Aluno;
 import trabalho.acompanhamento.modelos.Entrega;
 import trabalho.acompanhamento.modelos.Solicitacao;
