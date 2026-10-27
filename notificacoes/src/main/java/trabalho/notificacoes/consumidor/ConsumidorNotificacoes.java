@@ -64,7 +64,8 @@ public class ConsumidorNotificacoes {
             notificacaoRepository.save(notificacao);
 
         } catch (JacksonException e) {
-            System.out.println("Erro ao interpretar o JSON: " + e.getMessage());
+            System.err.println("Falha ao interpretar o JSON: " + e.getMessage());
+            throw new IllegalStateException("Não foi possível processar a mensagem recebida", e);
         }
     }
 }
