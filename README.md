@@ -6,6 +6,7 @@ Serviço que envia por e-mail um lembrete ao aluno que ainda não entregou uma t
 
 Autor: Pedro Gonçalves Trarbach
 
+Vídeo de Apresentação: https://youtu.be/DB7nq8ldrNQ
 ---
 
 Arquitetura
