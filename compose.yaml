@@ -1,0 +1,39 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4-management
+    ports: ["5672:5672", "15672:15672"]
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin123
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      retries: 20
+
+  mailpit:
+    image: axllent/mailpit
+    ports: ["1025:1025", "8025:8025"]
+
+  moodle-simulado:
+    build: ./acompanhamento/moodle-simulado
+    ports: ["8000:8000"]
+
+  acompanhamento:
+    build: ./acompanhamento
+    depends_on:
+      rabbitmq: {condition: service_healthy}
+      moodle-simulado: {condition: service_started}
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      MOODLE_BASE_URL: http://moodle-simulado:8000/webservice/rest/server.php
+      ACOMPANHAMENTO_INTERVALO_MS: 10000
+
+  notificacoes:
+    build: ./notificacoes
+    depends_on:
+      rabbitmq: {condition: service_healthy}
+      mailpit: {condition: service_started}
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_MAIL_HOST: mailpit
+    ports: ["8081:8081"]
